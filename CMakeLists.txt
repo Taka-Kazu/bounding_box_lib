@@ -12,14 +12,14 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   visualization_msgs
+  cmake_modules
 )
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
 find_package(Eigen3 REQUIRED COMPONENTS system)
-include_directories(${Eigen_INCLUDE_DIRS})
-
+message(STATUS "Eigen: " ${EIGEN_INCLUDE_DIRS})
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -122,13 +122,14 @@ catkin_package(
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
+  ${EIGEN_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/bounding_box_lib.cpp
 # )
-add_library(bounding_box src/bounding_box.cpp)
+add_library(bounding_box_lib src/bounding_box.cpp)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -140,10 +141,10 @@ add_library(bounding_box src/bounding_box.cpp)
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/bounding_box_lib_node.cpp)
 
-add_executable(test_bb src/test_bb.cpp)
-target_link_libraries(test_bb
+add_executable(test_bounding_box src/test_bb.cpp)
+target_link_libraries(test_bounding_box
     ${catkin_LIBRARIES}
-    bounding_box
+    bounding_box_lib
 )
 
 ## Rename C++ executable without prefix
