@@ -31,7 +31,7 @@ namespace bounding_box_lib
 
     private:
         visualization_msgs::Marker bb;
-        std::vector<geometry_msgs::Point> vertices;
+        std::vector<geometry_msgs::Point> vertices;// ftl, ftr, fbl, fbr, btl, btr, bbl, bbr
 
     };
 

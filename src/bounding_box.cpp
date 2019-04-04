@@ -63,46 +63,11 @@ namespace bounding_box_lib
 
     void BoundingBox::calculate_vertices(void)
     {
-        size_t index = 0;
-        // front, top, left
-        vertices[index].x = bb.scale.x * 0.5;
-        vertices[index].y = bb.scale.y * 0.5;
-        vertices[index].z = bb.scale.z * 0.5;
-        index++;
-        // front, top, right
-        vertices[index].x = bb.scale.x * 0.5;
-        vertices[index].y = -bb.scale.y * 0.5;
-        vertices[index].z = bb.scale.z * 0.5;
-        index++;
-        // front, bottom, left
-        vertices[index].x = bb.scale.x * 0.5;
-        vertices[index].y = bb.scale.y * 0.5;
-        vertices[index].z = -bb.scale.z * 0.5;
-        index++;
-        // front, bottom, right
-        vertices[index].x = bb.scale.x * 0.5;
-        vertices[index].y = -bb.scale.y * 0.5;
-        vertices[index].z = -bb.scale.z * 0.5;
-        index++;
-        // back, top, left
-        vertices[index].x = -bb.scale.x * 0.5;
-        vertices[index].y = bb.scale.y * 0.5;
-        vertices[index].z = bb.scale.z * 0.5;
-        index++;
-        // back, top, right
-        vertices[index].x = -bb.scale.x * 0.5;
-        vertices[index].y = -bb.scale.y * 0.5;
-        vertices[index].z = bb.scale.z * 0.5;
-        index++;
-        // back, bottom, left
-        vertices[index].x = -bb.scale.x * 0.5;
-        vertices[index].y = bb.scale.y * 0.5;
-        vertices[index].z = -bb.scale.z * 0.5;
-        index++;
-        // back, bottom, right
-        vertices[index].x = -bb.scale.x * 0.5;
-        vertices[index].y = -bb.scale.y * 0.5;
-        vertices[index].z = -bb.scale.z * 0.5;
+        for(int i=0;i<8;i++){
+            vertices[i].x = bb.scale.x * ((i < 4) ? 0.5 : -0.5);
+            vertices[i].y = bb.scale.y * ((i % 2 == 0) ? 0.5 : -0.5);
+            vertices[i].z = bb.scale.z * ((i % 4 == 0) || (i % 4 == 1) ? 0.5 : -0.5);
+        }
 
         for(auto& vertex : vertices){
              vertex = get_point_msg_from_eigen(get_quaternion_eigen_from_msg(bb.pose.orientation) * get_point_eigen_from_msg(vertex) + get_point_eigen_from_msg(bb.pose.position));
