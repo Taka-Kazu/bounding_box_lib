@@ -138,6 +138,28 @@ namespace bounding_box_lib
         bb.points.push_back(vertices[7]);
     }
 
+    void  BoundingBox::get_vertices(std::vector<Eigen::Vector3d>& vs)
+    {
+        std::vector<Eigen::Vector3d> _vertices;
+        for(auto& v : vertices){
+            Eigen::Vector3d _v;
+            _v << v.x, v.y, v.z;
+            _vertices.push_back(_v);
+        }
+        vs = _vertices;
+    }
+
+    void BoundingBox::set_vertices(std::vector<Eigen::Vector3d>& vs)
+    {
+        int size = vs.size();
+        if(size != 8){
+            return;
+        }
+        for(int i=0;i<size;i++){
+            vertices[i].x = vs[i][0];
+        }
+    }
+
     Eigen::Quaterniond get_quaternion_eigen_from_msg(geometry_msgs::Quaternion q)
     {
         Eigen::Quaterniond q_e{q.w, q.x, q.y, q.z};
@@ -160,3 +182,4 @@ namespace bounding_box_lib
         return p;
     }
 }
+

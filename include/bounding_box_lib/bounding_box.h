@@ -28,6 +28,8 @@ namespace bounding_box_lib
         visualization_msgs::Marker get_bounding_box(void);
         void reset(void);
         void make_cuboid(void);
+        void get_vertices(std::vector<Eigen::Vector3d>&);
+        void set_vertices(std::vector<Eigen::Vector3d>&);
 
     private:
         visualization_msgs::Marker bb;
