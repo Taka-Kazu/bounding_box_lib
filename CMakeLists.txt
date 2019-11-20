@@ -108,7 +108,7 @@ message(STATUS "Eigen: " ${EIGEN_INCLUDE_DIRS})
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
    INCLUDE_DIRS include
-#  LIBRARIES bounding_box_lib
+   LIBRARIES bounding_box_lib
 #  CATKIN_DEPENDS roscpp rospy std_msgs visualization_msgs
 #  DEPENDS system_lib
 )
