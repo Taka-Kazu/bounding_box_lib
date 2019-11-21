@@ -6,8 +6,7 @@ namespace bounding_box_lib
     {
         bb.type = visualization_msgs::Marker::LINE_LIST;
         bb.action = visualization_msgs::Marker::ADD;
-        //bb.lifetime = ros::Duration();
-        bb.lifetime = ros::Duration(0.1);
+        bb.lifetime = ros::Duration();
         bb.header.frame_id = "/map";
         set_rgb(0, 255, 255);
         bb.color.a = 0.7;
